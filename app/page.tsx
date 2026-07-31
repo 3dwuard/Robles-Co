@@ -2,9 +2,24 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, Scale, ShieldCheck, MapPin } from "lucide-react";
+import Image from "next/image";
+import { Menu, ShieldCheck, MapPin } from "lucide-react";
+import IntakePanel from "@/components/intake/IntakePanel";
 
 type NavLink = { label: string; href: string };
+
+const teamMembers = [
+  {
+    name: "Jesús Contreras Licea",
+    photo: "/team/jesus-main.jpeg",
+    bio: "Partner at Robles & Co and BaRoCo Law in Los Cabos, Jesús has closed over 1,000 real estate transactions and brings 15+ years of experience in financial law, including senior roles at HSBC Mexico and top-tier firms. He also teaches Corporate Law, Crypto & Fintech at Universidad Anáhuac. From Cancún to Mexico City, he handles matters across Mexico's full jurisdiction.",
+  },
+  {
+    name: "Ángel Robles Santisteban",
+    photo: "/team/angel-main.jpeg",
+    bio: "Partner at Robles & Co and BaRoCo Law in Los Cabos, Ángel brings 18+ years of experience in real estate law, with deep expertise in civil, tax, and property registry matters. He has guided individuals, families, and construction companies through every stage of acquiring and regularizing property. From Mexico City to Cancún, he handles matters nationwide.",
+  },
+];
 
 const links: NavLink[] = [
   { label: "Services", href: "#services" },
@@ -175,12 +190,19 @@ export default function Home() {
             Meet the team
           </h2>
 
-          <div className="mt-10 flex flex-wrap items-start justify-center gap-10">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="h-28 w-28 rounded-full bg-gray-200 sm:h-32 sm:w-32"
-              />
+          <div className="mt-10 flex flex-col items-center gap-12 sm:flex-row sm:items-start sm:justify-center">
+            {teamMembers.map((member) => (
+              <div key={member.name} className="flex max-w-xs flex-col items-center text-center">
+                <Image
+                  src={member.photo}
+                  alt={member.name}
+                  width={128}
+                  height={128}
+                  className="h-32 w-32 rounded-full object-cover"
+                />
+                <p className="mt-4 font-serif text-lg text-gray-900">{member.name}</p>
+                <p className="mt-2 text-sm text-gray-500">{member.bio}</p>
+              </div>
             ))}
           </div>
         </div>
@@ -188,27 +210,7 @@ export default function Home() {
 
       {/* AI intake panel */}
       <section className="w-full border-t border-gray-200 px-6 py-20">
-        <div className="mx-auto max-w-lg overflow-hidden rounded-xl border border-gray-200 shadow-sm">
-          <div className="flex items-center gap-2 border-b border-gray-200 bg-gray-50 px-4 py-3">
-            <Scale className="h-4 w-4 text-gray-500" />
-            <span className="font-mono text-xs text-gray-500">
-              robles-ai-intake
-            </span>
-            <span className="ml-auto h-2 w-2 rounded-full bg-green-500" />
-          </div>
-
-          <div className="flex flex-col gap-3 bg-white px-4 py-5">
-            <div className="max-w-[80%] self-start rounded-2xl rounded-bl-sm bg-gray-100 px-4 py-2 text-sm text-gray-800">
-              Buying a house, buying land, or need legal advice?
-            </div>
-            <div className="max-w-[80%] self-end rounded-2xl rounded-br-sm bg-gray-900 px-4 py-2 text-sm text-white">
-              Legal advice — already own
-            </div>
-            <div className="max-w-[80%] self-start rounded-2xl rounded-bl-sm bg-gray-100 px-4 py-2 text-sm text-gray-800">
-              Tell me about your situation
-            </div>
-          </div>
-        </div>
+        <IntakePanel />
       </section>
 
       {/* Cases */}
@@ -239,7 +241,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="w-full border-t border-gray-200 px-6 py-8">
         <p className="text-center text-xs text-gray-400">
-          Powered by AI · Created by JECL
+          Created by JECL · Powered by AI · 2026
         </p>
       </footer>
     </main>
