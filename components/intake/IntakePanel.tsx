@@ -81,6 +81,27 @@ export default function IntakePanel() {
       console.error("Failed to save intake submission:", error);
     }
 
+    try {
+      const res = await fetch("/api/notify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          need: finalAnswers.need,
+          description: finalAnswers.description,
+          valueRange: finalAnswers.valueRange,
+          urgent: finalAnswers.urgent,
+          name: finalAnswers.name,
+          contactMethod: finalAnswers.contactMethod,
+          contactValue: finalAnswers.contactValue,
+        }),
+      });
+      if (!res.ok) {
+        console.error("Failed to send notification email:", await res.text());
+      }
+    } catch (err) {
+      console.error("Failed to send notification email:", err);
+    }
+
     setStage("done");
   }
 
