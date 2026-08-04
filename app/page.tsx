@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, ShieldCheck, MapPin } from "lucide-react";
+import { ChevronDown, Menu, ShieldCheck, MapPin } from "lucide-react";
 import IntakePanel from "@/components/intake/IntakePanel";
 import { practiceAreas } from "@/data/practiceAreas";
 
@@ -26,6 +26,7 @@ const links: NavLink[] = [
   { label: "Services", href: "#services" },
   { label: "Team", href: "/team" },
   { label: "Cases", href: "#cases" },
+  { label: "Careers", href: "/careers" },
 ];
 
 function NavAnchor({ link, className, onClick }: { link: NavLink; className: string; onClick?: () => void }) {
@@ -101,11 +102,27 @@ const cases = [
     description:
       "Coordinated a home purchase alongside a temporary residency application for a relocating family.",
   },
+  {
+    tag: "Mexico City · fideicomiso structuring",
+    description:
+      "Structured a fideicomiso for a foreign family acquiring a residential property, ensuring full compliance with restricted-zone regulations.",
+  },
+  {
+    tag: "Cancún · developer contract review",
+    description:
+      "Reviewed and renegotiated a pre-construction contract, adding buyer protections against delivery delays.",
+  },
+  {
+    tag: "Mexico City · corporate restructuring",
+    description:
+      "Advised a mid-size company through a merger, coordinating due diligence and regulatory filings.",
+  },
 ];
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [language, setLanguage] = useState<"EN" | "ES">("EN");
+  const [casesExpanded, setCasesExpanded] = useState(false);
 
   return (
     <main className="flex min-h-screen flex-col items-center">
@@ -252,7 +269,7 @@ export default function Home() {
           </h2>
 
           <div className="mt-10 flex flex-col">
-            {cases.map((item, i) => (
+            {cases.slice(0, 3).map((item, i) => (
               <div
                 key={item.tag}
                 className={`py-6 ${i !== 0 ? "border-t border-gray-200" : ""}`}
@@ -266,6 +283,40 @@ export default function Home() {
               </div>
             ))}
           </div>
+
+          <div
+            className={`grid overflow-hidden transition-[grid-template-rows] duration-500 ease-in-out ${
+              casesExpanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+            }`}
+          >
+            <div className="min-h-0 overflow-hidden">
+              <div className="flex flex-col">
+                {cases.slice(3).map((item) => (
+                  <div key={item.tag} className="border-t border-gray-200 py-6">
+                    <p className="font-mono text-xs uppercase tracking-wide text-gray-400">
+                      {item.tag}
+                    </p>
+                    <p className="mt-2 font-serif text-lg text-gray-800">
+                      {item.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {!casesExpanded && (
+            <div className="mt-6 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setCasesExpanded(true)}
+                className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-4 py-2 text-sm text-gray-600 transition-colors hover:border-gray-400 hover:text-gray-900"
+              >
+                Continue reading
+                <ChevronDown className="h-4 w-4" />
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
