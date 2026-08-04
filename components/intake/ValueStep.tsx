@@ -3,35 +3,44 @@
 import { useState } from "react";
 import {
   AddMessage,
+  PracticeArea,
   TIMING_OPTIONS,
   VALUE_OPTIONS,
   ValueRangeId,
   optionButtonClass,
 } from "./types";
+import { Language, translations } from "@/lib/translations";
 
 export default function ValueStep({
   addMessage,
+  practiceArea,
+  language,
   onComplete,
 }: {
   addMessage: AddMessage;
-  onComplete: (data: { valueRange: ValueRangeId; urgent: boolean }) => void;
+  practiceArea?: PracticeArea;
+  language: Language;
+  onComplete: (data: { valueRange?: ValueRangeId; urgent: boolean }) => void;
 }) {
-  const [subStage, setSubStage] = useState<"value" | "timing">("value");
+  const showValueRange = practiceArea === "Real Estate";
+  const [subStage, setSubStage] = useState<"value" | "timing">(
+    showValueRange ? "value" : "timing"
+  );
   const [valueRange, setValueRange] = useState<ValueRangeId | null>(null);
 
   function handleValueSelect(option: (typeof VALUE_OPTIONS)[number]) {
     console.log("value selected:", option);
     addMessage("user", option.usd);
     setValueRange(option.id);
-    addMessage("bot", "When are you hoping to move forward?");
+    addMessage("bot", translations[language].funnel.whenMoveForward);
     setSubStage("timing");
   }
 
   function handleTimingSelect(option: (typeof TIMING_OPTIONS)[number]) {
     console.log("timing selected:", option);
     addMessage("user", option.label);
-    if (!valueRange) return;
-    onComplete({ valueRange, urgent: option.urgent });
+    if (showValueRange && !valueRange) return;
+    onComplete({ valueRange: valueRange ?? undefined, urgent: option.urgent });
   }
 
   if (subStage === "value") {

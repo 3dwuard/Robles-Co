@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
+import { teamMembers } from "@/data/team";
 
 function LinkedinIcon({ className }: { className?: string }) {
   return (
@@ -12,13 +14,6 @@ function LinkedinIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
-const team = [
-  {
-    name: "Attorney Name",
-    bio: "Short bio placeholder describing focus areas, experience, and background — real copy comes later.",
-  },
-];
 
 export default function TeamPage() {
   return (
@@ -48,12 +43,18 @@ export default function TeamPage() {
           </h1>
 
           <div className="mt-12 flex flex-wrap justify-center gap-8 sm:justify-start">
-            {team.map((member) => (
+            {teamMembers.map((member) => (
               <div
                 key={member.name}
                 className="w-full max-w-xs rounded-xl border border-gray-200 p-6 sm:w-72"
               >
-                <div className="mx-auto h-24 w-24 rounded-full bg-gray-200" />
+                <Image
+                  src={member.photo}
+                  alt={member.name}
+                  width={96}
+                  height={96}
+                  className="mx-auto h-24 w-24 rounded-full object-cover"
+                />
 
                 <h2 className="mt-4 text-center font-serif text-lg text-gray-900">
                   {member.name}

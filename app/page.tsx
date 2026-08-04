@@ -6,40 +6,40 @@ import Image from "next/image";
 import { ChevronDown, Menu, ShieldCheck, MapPin } from "lucide-react";
 import IntakePanel from "@/components/intake/IntakePanel";
 import { practiceAreas } from "@/data/practiceAreas";
+import { teamMembers } from "@/data/team";
+import { Language, translations } from "@/lib/translations";
 
-type NavLink = { label: string; href: string };
-
-const teamMembers = [
-  {
-    name: "Jesús Contreras Licea",
-    photo: "/team/jesus-main.jpeg",
-    bio: "Partner at Robles & Co and BaRoCo Law in Los Cabos, Jesús has closed over 1,000 real estate transactions and brings 15+ years of experience in financial law, including senior roles at HSBC Mexico and top-tier firms. He also teaches Corporate Law, Crypto & Fintech at Universidad Anáhuac. From Cancún to Mexico City, he handles matters across Mexico's full jurisdiction.",
-  },
-  {
-    name: "Ángel Robles Santisteban",
-    photo: "/team/angel-main.jpeg",
-    bio: "Partner at Robles & Co and BaRoCo Law in Los Cabos, Ángel brings 18+ years of experience in real estate law, with deep expertise in civil, tax, and property registry matters. He has guided individuals, families, and construction companies through every stage of acquiring and regularizing property. From Mexico City to Cancún, he handles matters nationwide.",
-  },
-];
+type NavLinkKey = "services" | "team" | "cases" | "careers";
+type NavLink = { key: NavLinkKey; href: string };
 
 const links: NavLink[] = [
-  { label: "Services", href: "#services" },
-  { label: "Team", href: "/team" },
-  { label: "Cases", href: "#cases" },
-  { label: "Careers", href: "/careers" },
+  { key: "services", href: "#services" },
+  { key: "team", href: "/team" },
+  { key: "cases", href: "#cases" },
+  { key: "careers", href: "/careers" },
 ];
 
-function NavAnchor({ link, className, onClick }: { link: NavLink; className: string; onClick?: () => void }) {
+function NavAnchor({
+  link,
+  label,
+  className,
+  onClick,
+}: {
+  link: NavLink;
+  label: string;
+  className: string;
+  onClick?: () => void;
+}) {
   if (link.href.startsWith("/")) {
     return (
       <Link href={link.href} onClick={onClick} className={className}>
-        {link.label}
+        {label}
       </Link>
     );
   }
   return (
     <a href={link.href} onClick={onClick} className={className}>
-      {link.label}
+      {label}
     </a>
   );
 }
@@ -49,8 +49,8 @@ function LanguageSwitcher({
   setLanguage,
   className = "",
 }: {
-  language: "EN" | "ES";
-  setLanguage: (lang: "EN" | "ES") => void;
+  language: Language;
+  setLanguage: (lang: Language) => void;
   className?: string;
 }) {
   return (
@@ -121,8 +121,9 @@ const cases = [
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [language, setLanguage] = useState<"EN" | "ES">("EN");
+  const [language, setLanguage] = useState<Language>("EN");
   const [casesExpanded, setCasesExpanded] = useState(false);
+  const t = translations[language];
 
   return (
     <main className="flex min-h-screen flex-col items-center">
@@ -136,9 +137,10 @@ export default function Home() {
           <div className="hidden items-center gap-8 md:flex">
             <ul className="flex items-center gap-8">
               {links.map((link) => (
-                <li key={link.label}>
+                <li key={link.key}>
                   <NavAnchor
                     link={link}
+                    label={t.nav[link.key]}
                     className="text-sm text-gray-600 transition-colors hover:text-gray-900"
                   />
                 </li>
@@ -162,9 +164,10 @@ export default function Home() {
           <div className="flex flex-col gap-5 border-t border-gray-200 px-6 py-4 md:hidden">
             <ul className="flex flex-col gap-4">
               {links.map((link) => (
-                <li key={link.label}>
+                <li key={link.key}>
                   <NavAnchor
                     link={link}
+                    label={t.nav[link.key]}
                     onClick={() => setIsMenuOpen(false)}
                     className="text-sm text-gray-600 transition-colors hover:text-gray-900"
                   />
@@ -180,22 +183,20 @@ export default function Home() {
       <section className="w-full px-6 py-20 md:py-28">
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
           <h1 className="font-serif text-3xl leading-tight text-gray-900 sm:text-4xl md:text-5xl">
-            Buy property in Mexico with full legal backing
+            {t.hero.headline}
           </h1>
           <p className="mt-5 max-w-xl text-base text-gray-600 sm:text-lg">
-            From Mexico City to Cancún, we guide buyers through every legal
-            step of a property purchase — clearly, and with a licensed
-            attorney at every stage.
+            {t.hero.subtext}
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-3 py-1.5 text-xs text-gray-600">
               <ShieldCheck className="h-3.5 w-3.5" />
-              Licensed attorneys
+              {t.badges.licensed}
             </span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-3 py-1.5 text-xs text-gray-600">
               <MapPin className="h-3.5 w-3.5" />
-              CDMX &amp; Cancún
+              {t.badges.locations}
             </span>
           </div>
         </div>
@@ -205,13 +206,13 @@ export default function Home() {
       <section id="services" className="w-full border-t border-gray-200 px-6 py-20">
         <div className="mx-auto max-w-5xl">
           <h2 className="text-center font-serif text-2xl text-gray-900">
-            Practice areas
+            {t.services.heading}
           </h2>
 
           <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {practiceAreas.map((area) => {
               const Icon = area.icon;
-              const teaser = area.summary.split(". ")[0] + ".";
+              const teaser = t.services.teasers[area.slug as keyof typeof t.services.teasers];
 
               return (
                 <Link
@@ -235,7 +236,7 @@ export default function Home() {
       <section id="team" className="w-full border-t border-gray-200 px-6 py-20">
         <div className="mx-auto max-w-4xl">
           <h2 className="text-center font-serif text-2xl text-gray-900">
-            Meet the team
+            {t.team.heading}
           </h2>
 
           <div className="mt-10 flex flex-col items-center gap-12 sm:flex-row sm:items-start sm:justify-center">
@@ -258,14 +259,14 @@ export default function Home() {
 
       {/* AI intake panel */}
       <section className="w-full border-t border-gray-200 px-6 py-20">
-        <IntakePanel />
+        <IntakePanel language={language} />
       </section>
 
       {/* Cases */}
       <section id="cases" className="w-full border-t border-gray-200 px-6 py-20">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-center font-serif text-2xl text-gray-900">
-            Cases we&apos;ve handled
+            {t.cases.heading}
           </h2>
 
           <div className="mt-10 flex flex-col">
@@ -323,7 +324,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="w-full border-t border-gray-200 px-6 py-8">
         <p className="text-center text-xs text-gray-400">
-          Created by JECL · Powered by AI · 2026
+          {t.footer.text}
         </p>
       </footer>
     </main>

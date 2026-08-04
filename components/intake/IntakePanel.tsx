@@ -8,6 +8,7 @@ import ValueStep from "./ValueStep";
 import ContactStep from "./ContactStep";
 import ResultStep from "./ResultStep";
 import { supabase } from "@/lib/supabase";
+import { Language, translations } from "@/lib/translations";
 import {
   ContactMethod,
   IntakeAnswers,
@@ -18,13 +19,13 @@ import {
   ValueRangeId,
 } from "./types";
 
-export default function IntakePanel() {
+export default function IntakePanel({ language }: { language: Language }) {
   const [stage, setStage] = useState<IntakeStage>("situation");
   const [messages, setMessages] = useState<IntakeMessage[]>([
     {
       id: 0,
       sender: "bot",
-      text: "What can we help you with?",
+      text: translations[language].funnel.whatCanWeHelp,
     },
   ]);
   const [answers, setAnswers] = useState<IntakeAnswers>({});
@@ -33,13 +34,18 @@ export default function IntakePanel() {
     console.log("answers updated:", answers);
   }, [answers]);
 
+  useEffect(() => {
+    const text = translations[language].funnel.whatCanWeHelp;
+    setMessages((prev) => (stage === "situation" && prev.length === 1 ? [{ ...prev[0], text }] : prev));
+  }, [language, stage]);
+
   function addMessage(sender: "bot" | "user", text: string) {
     setMessages((prev) => [...prev, { id: prev.length, sender, text }]);
   }
 
   function handleSituationComplete(need: Need, practiceArea: PracticeArea) {
     setAnswers((prev) => ({ ...prev, need, practiceArea }));
-    addMessage("bot", "Tell me about your situation.");
+    addMessage("bot", translations[language].funnel.tellUsSituation);
     setStage("describe");
   }
 
@@ -49,13 +55,17 @@ export default function IntakePanel() {
       description: data.description,
       attachment: data.attachment,
     }));
-    addMessage("bot", "What's the property value range?");
+    if (answers.practiceArea === "Real Estate") {
+      addMessage("bot", "What's the property value range?");
+    } else {
+      addMessage("bot", translations[language].funnel.whenMoveForward);
+    }
     setStage("value");
   }
 
-  function handleValueComplete(data: { valueRange: ValueRangeId; urgent: boolean }) {
+  function handleValueComplete(data: { valueRange?: ValueRangeId; urgent: boolean }) {
     setAnswers((prev) => ({ ...prev, valueRange: data.valueRange, urgent: data.urgent }));
-    addMessage("bot", "Leave your info, we'll be in touch");
+    addMessage("bot", translations[language].funnel.leaveInfo);
     setStage("contact");
   }
 
@@ -108,9 +118,10 @@ export default function IntakePanel() {
     setStage("done");
   }
 
-  const isHighValue = Boolean(answers.valueRange) && answers.valueRange !== "under-250k";
-  const wantsWhatsapp = isHighValue && answers.urgent === true;
-  console.log("isHighValue:", isHighValue, "wantsWhatsapp:", wantsWhatsapp);
+  const wantsWhatsapp = answers.valueRange
+    ? answers.valueRange !== "under-250k" && answers.urgent === true
+    : answers.urgent === true;
+  console.log("wantsWhatsapp:", wantsWhatsapp);
 
   return (
     <div className="relative mx-auto max-w-2xl">
@@ -142,13 +153,22 @@ export default function IntakePanel() {
             )}
 
             {stage === "situation" && (
-              <SituationStep addMessage={addMessage} onComplete={handleSituationComplete} />
+              <SituationStep
+                addMessage={addMessage}
+                onComplete={handleSituationComplete}
+                language={language}
+              />
             )}
             {stage === "describe" && (
               <DescribeStep addMessage={addMessage} onComplete={handleDescribeComplete} />
             )}
             {stage === "value" && (
-              <ValueStep addMessage={addMessage} onComplete={handleValueComplete} />
+              <ValueStep
+                addMessage={addMessage}
+                practiceArea={answers.practiceArea}
+                language={language}
+                onComplete={handleValueComplete}
+              />
             )}
             {stage === "contact" && (
               <ContactStep addMessage={addMessage} onComplete={handleContactComplete} />

@@ -9,18 +9,22 @@ import {
   PracticeArea,
   optionButtonClass,
 } from "./types";
+import { Language, translations } from "@/lib/translations";
 
 export default function SituationStep({
   addMessage,
   onComplete,
+  language,
 }: {
   addMessage: AddMessage;
   onComplete: (need: Need, practiceArea: PracticeArea) => void;
+  language: Language;
 }) {
   const [practiceArea, setPracticeArea] = useState<PracticeArea | null>(null);
+  const categoryLabels = translations[language].funnel.categories;
 
   function handleSelectCategory(area: PracticeArea) {
-    addMessage("user", area);
+    addMessage("user", categoryLabels[area]);
 
     const subOptions = PRACTICE_AREA_SUB_OPTIONS[area];
     if (!subOptions) {
@@ -64,7 +68,7 @@ export default function SituationStep({
           onClick={() => handleSelectCategory(area)}
           className={optionButtonClass}
         >
-          {area}
+          {categoryLabels[area]}
         </button>
       ))}
     </div>
