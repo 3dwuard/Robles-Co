@@ -6,6 +6,7 @@ const NOTIFY_FROM = "onboarding@resend.dev";
 
 type NotifyPayload = {
   need?: string;
+  practiceArea?: string;
   description?: string;
   valueRange?: string;
   urgent?: boolean;
@@ -27,9 +28,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
   }
 
-  const { need, description, valueRange, urgent, name, contactMethod, contactValue } = payload;
+  const { need, practiceArea, description, valueRange, urgent, name, contactMethod, contactValue } =
+    payload;
 
   const body = [
+    `Practice area: ${practiceArea ?? "-"}`,
     `Need: ${need ?? "-"}`,
     `Description: ${description ?? "-"}`,
     `Value range: ${valueRange ?? "-"}`,

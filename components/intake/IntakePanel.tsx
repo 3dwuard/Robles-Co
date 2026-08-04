@@ -14,6 +14,7 @@ import {
   IntakeMessage,
   IntakeStage,
   Need,
+  PracticeArea,
   ValueRangeId,
 } from "./types";
 
@@ -23,7 +24,7 @@ export default function IntakePanel() {
     {
       id: 0,
       sender: "bot",
-      text: "Are you buying a house, buying land, or need legal advice?",
+      text: "What can we help you with?",
     },
   ]);
   const [answers, setAnswers] = useState<IntakeAnswers>({});
@@ -36,8 +37,8 @@ export default function IntakePanel() {
     setMessages((prev) => [...prev, { id: prev.length, sender, text }]);
   }
 
-  function handleSituationComplete(need: Need) {
-    setAnswers((prev) => ({ ...prev, need }));
+  function handleSituationComplete(need: Need, practiceArea: PracticeArea) {
+    setAnswers((prev) => ({ ...prev, need, practiceArea }));
     addMessage("bot", "Tell me about your situation.");
     setStage("describe");
   }
@@ -69,6 +70,7 @@ export default function IntakePanel() {
 
     const { error } = await supabase.from("intake_submissions").insert({
       need: finalAnswers.need,
+      practice_area: finalAnswers.practiceArea,
       description: finalAnswers.description,
       value_range: finalAnswers.valueRange,
       urgent: finalAnswers.urgent,
@@ -87,6 +89,7 @@ export default function IntakePanel() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           need: finalAnswers.need,
+          practiceArea: finalAnswers.practiceArea,
           description: finalAnswers.description,
           valueRange: finalAnswers.valueRange,
           urgent: finalAnswers.urgent,

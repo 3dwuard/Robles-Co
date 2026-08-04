@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Menu, ShieldCheck, MapPin } from "lucide-react";
 import IntakePanel from "@/components/intake/IntakePanel";
+import { practiceAreas } from "@/data/practiceAreas";
 
 type NavLink = { label: string; href: string };
 
@@ -179,6 +180,36 @@ export default function Home() {
               <MapPin className="h-3.5 w-3.5" />
               CDMX &amp; Cancún
             </span>
+          </div>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section id="services" className="w-full border-t border-gray-200 px-6 py-20">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="text-center font-serif text-2xl text-gray-900">
+            Practice areas
+          </h2>
+
+          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {practiceAreas.map((area) => {
+              const Icon = area.icon;
+              const teaser = area.summary.split(". ")[0] + ".";
+
+              return (
+                <Link
+                  key={area.slug}
+                  href={`/practice-areas/${area.slug}`}
+                  className="flex flex-col rounded-xl border border-gray-200 p-6 transition-colors hover:border-gray-400"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#ad8a4e]/40 bg-[#ad8a4e]/[0.06]">
+                    <Icon className="h-6 w-6 text-[#ad8a4e]" />
+                  </div>
+                  <h3 className="mt-4 font-serif text-lg text-gray-900">{area.title}</h3>
+                  <p className="mt-2 text-sm text-gray-600">{teaser}</p>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
