@@ -60,6 +60,10 @@ export default function TeamPage() {
                   {member.name}
                 </h2>
 
+                <p className="mt-1 text-center text-sm text-gray-500">
+                  {member.title}
+                </p>
+
                 <p className="mt-2 text-center text-sm text-gray-600">
                   {member.bio}
                 </p>

@@ -241,7 +241,11 @@ export default function Home() {
 
           <div className="mt-10 flex flex-col items-center gap-12 sm:flex-row sm:items-start sm:justify-center">
             {teamMembers.map((member) => (
-              <div key={member.name} className="flex max-w-xs flex-col items-center text-center">
+              <Link
+                key={member.name}
+                href="/team"
+                className="flex max-w-xs flex-col items-center text-center transition-opacity hover:opacity-80"
+              >
                 <Image
                   src={member.photo}
                   alt={member.name}
@@ -250,8 +254,8 @@ export default function Home() {
                   className="h-32 w-32 rounded-full object-cover"
                 />
                 <p className="mt-4 font-serif text-lg text-gray-900">{member.name}</p>
-                <p className="mt-2 text-sm text-gray-500">{member.bio}</p>
-              </div>
+                <p className="mt-1 text-sm text-gray-500">{member.title}</p>
+              </Link>
             ))}
           </div>
         </div>

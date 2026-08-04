@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { practiceAreas } from "@/data/practiceAreas";
 
@@ -30,7 +31,16 @@ export default function CareersPage() {
             ← Back to home
           </Link>
 
-          <h1 className="mt-6 text-center font-serif text-3xl text-gray-900 sm:text-4xl">
+          <div className="relative mt-6 h-48 w-full overflow-hidden rounded-xl border border-gray-200 sm:h-64">
+            <Image
+              src="/team/jesus-casual.jpeg"
+              alt="Robles & Co team"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          <h1 className="mt-8 text-center font-serif text-3xl text-gray-900 sm:text-4xl">
             Join Robles &amp; Co
           </h1>
 
