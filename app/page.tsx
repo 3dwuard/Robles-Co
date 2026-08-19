@@ -299,30 +299,28 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="w-full border-t border-gray-200 px-6 py-8">
-        <div className="mx-auto flex max-w-4xl flex-col items-center gap-2 text-xs text-gray-500 sm:flex-row sm:justify-center sm:gap-6">
+        <div className="flex justify-center text-xs text-gray-500">
           <a
             href={FIRM_CONTACT.emailHref}
             className="transition-colors hover:text-[#ad8a4e]"
           >
             {FIRM_CONTACT.email}
           </a>
-          <a
-            href={FIRM_CONTACT.phoneHref}
-            className="transition-colors hover:text-[#ad8a4e]"
-          >
-            {FIRM_CONTACT.phone}
-          </a>
-          <Link
-            href="/aviso-de-privacidad"
-            className="transition-colors hover:text-[#ad8a4e]"
-          >
-            {t.footer.privacyLink}
-          </Link>
         </div>
 
-        <p className="mt-4 text-center text-xs text-gray-400">
-          {t.footer.text}
-        </p>
+        <div className="mx-auto mt-4 flex max-w-4xl flex-col items-center gap-2 border-t border-gray-100 pt-4 text-[11px] text-gray-400 sm:flex-row sm:justify-between sm:gap-4">
+          <p>{t.footer.copyright}</p>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/aviso-de-privacidad"
+              className="transition-colors hover:text-[#ad8a4e]"
+            >
+              {t.footer.privacyLink}
+            </Link>
+            <span aria-hidden="true">·</span>
+            <p>{t.footer.text}</p>
+          </div>
+        </div>
       </footer>
     </main>
   );

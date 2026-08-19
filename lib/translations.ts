@@ -56,7 +56,7 @@ type Translation = {
     };
     cvNote: string;
   };
-  footer: { text: string; privacyLink: string };
+  footer: { text: string; privacyLink: string; copyright: string };
   privacy: {
     heading: string;
     lastUpdated: string;
@@ -259,8 +259,9 @@ export const translations: Record<Language, Translation> = {
       cvNote: "Prefer to send your CV directly? Email us at",
     },
     footer: {
-      text: "Created by JECL · Powered by AI · 2026",
+      text: "Powered by AI · Created by JECL",
       privacyLink: "Privacy Notice",
+      copyright: "© 2026 Robles & Co",
     },
     privacy: {
       heading: "Privacy Notice",
@@ -485,8 +486,9 @@ export const translations: Record<Language, Translation> = {
       cvNote: "¿Prefieres enviar tu CV directamente? Escríbenos a",
     },
     footer: {
-      text: "Creado por JECL · Impulsado por IA · 2026",
+      text: "Impulsado por IA · Creado por JECL",
       privacyLink: "Aviso de Privacidad",
+      copyright: "© 2026 Robles & Co",
     },
     privacy: {
       heading: "Aviso de Privacidad",
