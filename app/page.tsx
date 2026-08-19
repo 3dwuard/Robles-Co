@@ -113,21 +113,35 @@ export default function Home() {
       </nav>
 
       {/* Hero */}
-      <section className="w-full px-6 py-24 md:py-32">
-        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-          <h1 className="font-serif text-3xl leading-tight text-gray-900 sm:text-4xl md:text-5xl">
+      <section className="relative w-full overflow-hidden px-6 py-24 md:py-32">
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/video/hero-poster.jpg"
+        >
+          <source src="/video/hero-bg-mobile.mp4" media="(max-width: 767px)" type="video/mp4" />
+          <source src="/video/hero-bg-desktop.mp4" media="(min-width: 768px)" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/40" />
+
+        <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center text-center">
+          <h1 className="font-serif text-3xl leading-tight text-white sm:text-4xl md:text-5xl">
             {t.hero.headline}
           </h1>
-          <p className="mt-5 max-w-xl text-base text-gray-600 sm:text-lg">
+          <p className="mt-5 max-w-xl text-base text-gray-200 sm:text-lg">
             {t.hero.subtext}
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-3 py-1.5 text-xs text-gray-600">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs text-white">
               <ShieldCheck className="h-3.5 w-3.5" />
               {t.badges.licensed}
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-3 py-1.5 text-xs text-gray-600">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs text-white">
               <MapPin className="h-3.5 w-3.5" />
               {t.badges.locations}
             </span>
