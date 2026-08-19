@@ -104,7 +104,7 @@ export default function DescribeStep({
 
       <p className="text-xs text-gray-400 md:text-sm">
         You can attach any documents or images that could help us understand your
-        situation better — a contract, listing, or photo, for example.
+        situation better, such as a contract, listing, or photo.
       </p>
     </form>
   );

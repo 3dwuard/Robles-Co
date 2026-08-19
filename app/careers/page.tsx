@@ -5,6 +5,7 @@ import Link from "next/link";
 import { practiceAreas } from "@/data/practiceAreas";
 import { useTranslation } from "@/lib/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import FadeInSection from "@/components/FadeInSection";
 
 const inputClass =
   "rounded-lg border border-gray-200 px-4 py-2.5 text-sm text-gray-800 outline-none focus:border-gray-400";
@@ -28,7 +29,7 @@ export default function CareersPage() {
       </div>
 
       <section className="w-full px-6 py-16 sm:py-20">
-        <div className="mx-auto max-w-xl">
+        <FadeInSection className="mx-auto max-w-xl">
           <Link
             href="/"
             className="text-sm text-gray-500 transition-colors hover:text-gray-900"
@@ -132,7 +133,7 @@ export default function CareersPage() {
             </a>
             .
           </p>
-        </div>
+        </FadeInSection>
       </section>
     </main>
   );

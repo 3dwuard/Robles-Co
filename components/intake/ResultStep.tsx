@@ -7,7 +7,7 @@ export default function ResultStep({ wantsWhatsapp }: { wantsWhatsapp: boolean }
   return (
     <div className="flex flex-col gap-3 pt-1">
       <div className="max-w-[80%] self-start rounded-2xl rounded-bl-sm bg-gray-100 px-4 py-2 text-sm text-gray-800 md:px-5 md:py-3 md:text-base">
-        Thanks for sharing your situation — we&apos;ll be in touch soon.
+        Thanks for sharing your situation. We&apos;ll be in touch soon.
       </div>
 
       <div className="rounded-lg border border-gray-100 bg-gray-50 p-3 md:p-4">

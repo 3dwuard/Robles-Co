@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ChevronDown, Menu, ShieldCheck, MapPin } from "lucide-react";
 import IntakePanel from "@/components/intake/IntakePanel";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import FadeInSection from "@/components/FadeInSection";
 import { practiceAreas } from "@/data/practiceAreas";
 import { teamMembers } from "@/data/team";
 import { useTranslation } from "@/lib/LanguageContext";
@@ -31,16 +32,23 @@ function NavAnchor({
   className: string;
   onClick?: () => void;
 }) {
+  const content = (
+    <span className="group relative inline-block">
+      {label}
+      <span className="pointer-events-none absolute -bottom-1 left-0 h-px w-0 bg-[#ad8a4e] transition-all duration-300 group-hover:w-full" />
+    </span>
+  );
+
   if (link.href.startsWith("/")) {
     return (
       <Link href={link.href} onClick={onClick} className={className}>
-        {label}
+        {content}
       </Link>
     );
   }
   return (
     <a href={link.href} onClick={onClick} className={className}>
-      {label}
+      {content}
     </a>
   );
 }
@@ -66,7 +74,7 @@ export default function Home() {
                   <NavAnchor
                     link={link}
                     label={t.nav[link.key]}
-                    className="text-sm text-gray-600 transition-colors hover:text-gray-900"
+                    className="text-sm text-gray-600 transition-colors hover:text-[#ad8a4e]"
                   />
                 </li>
               ))}
@@ -94,7 +102,7 @@ export default function Home() {
                     link={link}
                     label={t.nav[link.key]}
                     onClick={() => setIsMenuOpen(false)}
-                    className="text-sm text-gray-600 transition-colors hover:text-gray-900"
+                    className="text-sm text-gray-600 transition-colors hover:text-[#ad8a4e]"
                   />
                 </li>
               ))}
@@ -105,7 +113,7 @@ export default function Home() {
       </nav>
 
       {/* Hero */}
-      <section className="w-full px-6 py-20 md:py-28">
+      <section className="w-full px-6 py-24 md:py-32">
         <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
           <h1 className="font-serif text-3xl leading-tight text-gray-900 sm:text-4xl md:text-5xl">
             {t.hero.headline}
@@ -129,19 +137,24 @@ export default function Home() {
 
       {/* Stats */}
       <section className="w-full border-t border-gray-200 px-6 py-14">
-        <div className="mx-auto grid max-w-4xl grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-4">
-          {t.stats.map((stat) => (
-            <div key={stat.caption} className="flex flex-col items-center text-center">
-              <p className="font-serif text-2xl text-gray-900 sm:text-3xl">{stat.value}</p>
+        <FadeInSection className="mx-auto grid max-w-4xl grid-cols-2 gap-y-8 sm:grid-cols-4 sm:gap-4">
+          {t.stats.map((stat, i) => (
+            <div
+              key={stat.caption}
+              className={`flex flex-col items-center text-center ${
+                i !== 0 ? "sm:border-l sm:border-[#ad8a4e]/20 sm:pl-4" : ""
+              }`}
+            >
+              <p className="font-serif text-2xl text-[#ad8a4e] sm:text-3xl">{stat.value}</p>
               <p className="mt-1.5 text-xs text-gray-500">{stat.caption}</p>
             </div>
           ))}
-        </div>
+        </FadeInSection>
       </section>
 
       {/* Services */}
       <section id="services" className="w-full border-t border-gray-200 px-6 py-20">
-        <div className="mx-auto max-w-5xl">
+        <FadeInSection className="mx-auto max-w-5xl">
           <h2 className="text-center font-serif text-2xl text-gray-900">
             {t.services.heading}
           </h2>
@@ -155,7 +168,7 @@ export default function Home() {
                 <Link
                   key={area.slug}
                   href={`/practice-areas/${area.slug}`}
-                  className="flex flex-col rounded-xl border border-gray-200 p-6 transition-colors hover:border-gray-400"
+                  className="flex flex-col rounded-xl border border-gray-200 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 hover:shadow-lg"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#ad8a4e]/40 bg-[#ad8a4e]/[0.06]">
                     <Icon className="h-6 w-6 text-[#ad8a4e]" />
@@ -166,32 +179,32 @@ export default function Home() {
               );
             })}
           </div>
-        </div>
+        </FadeInSection>
       </section>
 
       {/* Team */}
       <section id="team" className="w-full border-t border-gray-200 px-6 py-20">
-        <div className="mx-auto max-w-4xl">
+        <FadeInSection className="mx-auto max-w-4xl">
           <h2 className="text-center font-serif text-2xl text-gray-900">
             {t.team.heading}
           </h2>
 
-          <div className="mt-10 flex flex-col items-center gap-12 sm:flex-row sm:items-start sm:justify-center">
+          <div className="mt-10 flex flex-wrap items-stretch justify-center gap-8">
             {teamMembers.map((member) => (
               <Link
-                key={member.name}
+                key={member.slug}
                 href="/team"
-                className="flex max-w-xs flex-col items-center text-center transition-opacity hover:opacity-80"
+                className="flex w-full max-w-xs flex-col items-center rounded-2xl border border-gray-200 px-8 py-10 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
                 <Image
                   src={member.photo}
                   alt={member.name}
-                  width={128}
-                  height={128}
-                  className="h-32 w-32 rounded-full object-cover"
+                  width={160}
+                  height={160}
+                  className="h-40 w-40 rounded-full object-cover"
                 />
-                <p className="mt-4 font-serif text-lg text-gray-900">{member.name}</p>
-                <p className="mt-1 text-sm text-gray-500">{member.title}</p>
+                <p className="mt-6 font-serif text-lg text-gray-900">{member.name}</p>
+                <p className="mt-2 text-sm text-gray-500">{member.title}</p>
               </Link>
             ))}
           </div>
@@ -199,7 +212,7 @@ export default function Home() {
           <p className="mx-auto mt-10 max-w-md text-center text-sm text-gray-500">
             {t.team.associatesNote}
           </p>
-        </div>
+        </FadeInSection>
       </section>
 
       {/* AI intake panel */}
@@ -209,16 +222,16 @@ export default function Home() {
 
       {/* Cases */}
       <section id="cases" className="w-full border-t border-gray-200 px-6 py-20">
-        <div className="mx-auto max-w-2xl">
+        <FadeInSection className="mx-auto max-w-2xl">
           <h2 className="text-center font-serif text-2xl text-gray-900">
             {t.cases.heading}
           </h2>
 
-          <div className="mt-10 flex flex-col">
-            {t.cases.items.slice(0, 3).map((item, i) => (
+          <div className="mt-10 flex flex-col gap-3">
+            {t.cases.items.slice(0, 3).map((item) => (
               <div
                 key={item.tag}
-                className={`py-6 ${i !== 0 ? "border-t border-gray-200" : ""}`}
+                className="rounded-xl border border-transparent px-4 py-6 transition-all duration-300 hover:-translate-y-1 hover:border-gray-200 hover:shadow-md"
               >
                 <p className="font-mono text-xs uppercase tracking-wide text-gray-400">
                   {item.tag}
@@ -236,9 +249,12 @@ export default function Home() {
             }`}
           >
             <div className="min-h-0 overflow-hidden">
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-3">
                 {t.cases.items.slice(3).map((item) => (
-                  <div key={item.tag} className="border-t border-gray-200 py-6">
+                  <div
+                    key={item.tag}
+                    className="rounded-xl border border-transparent px-4 py-6 transition-all duration-300 hover:-translate-y-1 hover:border-gray-200 hover:shadow-md"
+                  >
                     <p className="font-mono text-xs uppercase tracking-wide text-gray-400">
                       {item.tag}
                     </p>
@@ -256,14 +272,14 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => setCasesExpanded(true)}
-                className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-4 py-2 text-sm text-gray-600 transition-colors hover:border-gray-400 hover:text-gray-900"
+                className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-4 py-2 text-sm text-gray-600 transition-colors hover:border-[#ad8a4e]/50 hover:text-[#ad8a4e]"
               >
                 {t.cases.continueReading}
                 <ChevronDown className="h-4 w-4" />
               </button>
             </div>
           )}
-        </div>
+        </FadeInSection>
       </section>
 
       {/* Footer */}

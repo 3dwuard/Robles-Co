@@ -10,6 +10,8 @@ export type PracticeAreaSlug =
   | "tax-trusts"
   | "civil-family-disputes";
 
+export type TeamMemberSlug = "jesus-contreras-licea" | "angel-robles-santisteban";
+
 type PracticeAreaContent = {
   title: string;
   teaser: string;
@@ -25,7 +27,12 @@ type Translation = {
   hero: { headline: string; subtext: string };
   badges: { licensed: string; locations: string };
   stats: { value: string; caption: string }[];
-  team: { heading: string; pageHeading: string; associatesNote: string };
+  team: {
+    heading: string;
+    pageHeading: string;
+    associatesNote: string;
+    bios: Record<TeamMemberSlug, string>;
+  };
   services: {
     heading: string;
     whatWeHandleLabel: string;
@@ -72,7 +79,7 @@ export const translations: Record<Language, Translation> = {
     hero: {
       headline: "Trusted legal counsel for Mexico's most complex matters",
       subtext:
-        "From real estate to corporate, tax, and emerging finance — full-service legal representation across Mexico.",
+        "From real estate to corporate, tax, and emerging finance, we provide full-service legal representation across Mexico.",
     },
     badges: {
       licensed: "Licensed attorneys",
@@ -89,6 +96,12 @@ export const translations: Record<Language, Translation> = {
       pageHeading: "Our Partners",
       associatesNote:
         "Our partners are supported by a growing team of associates and legal staff across Mexico City, Cancún, and Los Cabos.",
+      bios: {
+        "jesus-contreras-licea":
+          "Partner at Robles & Co and BaRoCo Law in Los Cabos, Jesús has closed over 1,000 real estate transactions and brings 15+ years of experience in financial law, including senior roles at HSBC Mexico and top-tier firms. He also teaches Corporate Law, Crypto & Fintech at Universidad Anáhuac. From Cancún to Mexico City, he handles matters across Mexico's full jurisdiction.",
+        "angel-robles-santisteban":
+          "Partner at Robles & Co and BaRoCo Law in Los Cabos, Ángel brings 18+ years of experience in real estate law, with deep expertise in civil, tax, and property registry matters. He has guided individuals, families, and construction companies through every stage of acquiring and regularizing property. From Mexico City to Cancún, he handles matters nationwide.",
+      },
     },
     services: {
       heading: "Practice areas",
@@ -97,9 +110,9 @@ export const translations: Record<Language, Translation> = {
         "real-estate": {
           title: "Real Estate",
           teaser:
-            "We guide buyers and sellers through every stage of a Mexican property transaction — from initial offer through closing, notarial coordination, and title review.",
+            "We guide buyers and sellers through every stage of a Mexican property transaction, from initial offer through closing, notarial coordination, and title review.",
           summary:
-            "We guide buyers and sellers through every stage of a Mexican property transaction — from initial offer through closing, notarial coordination, and title review. Our particular strength is cross-border purchases: helping foreign buyers navigate fideicomiso structures, tax obligations, and regulatory requirements specific to non-Mexican nationals acquiring property in Mexico City and Cancún.",
+            "We guide buyers and sellers through every stage of a Mexican property transaction, from initial offer through closing, notarial coordination, and title review. Our particular strength is cross-border purchases: helping foreign buyers navigate fideicomiso structures, tax obligations, and regulatory requirements specific to non-Mexican nationals acquiring property in Mexico City and Cancún.",
           whatWeHandle: [
             "Purchase and sale agreements",
             "Title review and due diligence",
@@ -111,9 +124,9 @@ export const translations: Record<Language, Translation> = {
         "corporate-ma": {
           title: "Corporate, Mergers & Acquisitions",
           teaser:
-            "We advise companies through the full lifecycle of corporate transactions — from formation and governance to mergers, acquisitions, and capital raising.",
+            "We advise companies through the full lifecycle of corporate transactions, from formation and governance to mergers, acquisitions, and capital raising.",
           summary:
-            "We advise companies through the full lifecycle of corporate transactions — from formation and governance to mergers, acquisitions, and capital raising. Our team structures deals for both domestic and foreign entities across civil, commercial, and financial sectors.",
+            "We advise companies through the full lifecycle of corporate transactions, from formation and governance to mergers, acquisitions, and capital raising. Our team structures deals for both domestic and foreign entities across civil, commercial, and financial sectors.",
           whatWeHandle: [
             "Company formation and corporate governance",
             "M&A structuring and due diligence",
@@ -137,9 +150,9 @@ export const translations: Record<Language, Translation> = {
         "blockchain-fintech": {
           title: "Blockchain, Digital Assets & Fintech",
           teaser:
-            "We're at the forefront of Mexico's evolving digital asset landscape — advising on tokenization projects, SOFIPO formation, and the regulatory frameworks governing crypto-assets and fintech operations.",
+            "We're at the forefront of Mexico's evolving digital asset landscape. We advise on tokenization projects, SOFIPO formation, and the regulatory frameworks governing crypto-assets and fintech operations.",
           summary:
-            "We're at the forefront of Mexico's evolving digital asset landscape — advising on tokenization projects, SOFIPO formation, and the regulatory frameworks governing crypto-assets and fintech operations. Few firms in Mexico combine real estate depth with this level of blockchain fluency.",
+            "We're at the forefront of Mexico's evolving digital asset landscape. We advise on tokenization projects, SOFIPO formation, and the regulatory frameworks governing crypto-assets and fintech operations. Few firms in Mexico combine real estate depth with this level of blockchain fluency.",
           whatWeHandle: [
             "Token issuance and structuring",
             "SOFIPO formation and licensing",
@@ -150,9 +163,9 @@ export const translations: Record<Language, Translation> = {
         "tax-trusts": {
           title: "Tax & Trusts",
           teaser:
-            "We provide tax advisory across real estate and corporate transactions, and structure trusts (fideicomisos) for estate planning, asset protection, and investment purposes — an area that intersects closely with both our real estate and blockchain practices.",
+            "We provide tax advisory across real estate and corporate transactions, and structure trusts (fideicomisos) for estate planning, asset protection, and investment purposes. This is an area that intersects closely with both our real estate and blockchain practices.",
           summary:
-            "We provide tax advisory across real estate and corporate transactions, and structure trusts (fideicomisos) for estate planning, asset protection, and investment purposes — an area that intersects closely with both our real estate and blockchain practices.",
+            "We provide tax advisory across real estate and corporate transactions, and structure trusts (fideicomisos) for estate planning, asset protection, and investment purposes. This is an area that intersects closely with both our real estate and blockchain practices.",
           whatWeHandle: [
             "Transactional tax advisory",
             "Fideicomiso structuring",
@@ -163,9 +176,9 @@ export const translations: Record<Language, Translation> = {
         "civil-family-disputes": {
           title: "Civil, Family & Disputes",
           teaser:
-            "We handle a broad range of civil and family matters, from estate planning and inheritance to commercial contracts and dispute resolution — with an 89% success rate in litigated cases.",
+            "We handle a broad range of civil and family matters, from estate planning and inheritance to commercial contracts and dispute resolution, with an 89% success rate in litigated cases.",
           summary:
-            "We handle a broad range of civil and family matters, from estate planning and inheritance to commercial contracts and dispute resolution — with an 89% success rate in litigated cases.",
+            "We handle a broad range of civil and family matters, from estate planning and inheritance to commercial contracts and dispute resolution, with an 89% success rate in litigated cases.",
           whatWeHandle: [
             "Family law and succession",
             "Civil and commercial contracts",
@@ -214,7 +227,7 @@ export const translations: Record<Language, Translation> = {
     careers: {
       heading: "Join Robles & Co",
       intro:
-        "We work with lawyers at every stage of their career — from those looking to take on independent consulting work (asesorías) alongside us, to experienced attorneys seeking a long-term position, to firms we occasionally partner with or bring in for specialized matters. If you're a lawyer looking to grow your practice, we'd like to hear from you.",
+        "We work with lawyers at every stage of their career, from those looking to take on independent consulting work (asesorías) alongside us, to experienced attorneys seeking a long-term position, to firms we occasionally partner with or bring in for specialized matters. If you're a lawyer looking to grow your practice, we'd like to hear from you.",
       form: {
         name: "Name",
         namePlaceholder: "Your full name",
@@ -259,7 +272,7 @@ export const translations: Record<Language, Translation> = {
     hero: {
       headline: "Asesoría legal de confianza para los asuntos más complejos de México",
       subtext:
-        "De bienes raíces a derecho corporativo, fiscal y finanzas emergentes — representación legal integral en todo México.",
+        "De bienes raíces a derecho corporativo, fiscal y finanzas emergentes, ofrecemos representación legal integral en todo México.",
     },
     badges: {
       licensed: "Abogados certificados",
@@ -276,6 +289,12 @@ export const translations: Record<Language, Translation> = {
       pageHeading: "Nuestros Socios",
       associatesNote:
         "Nuestros socios cuentan con el respaldo de un equipo creciente de asociados y personal legal en la Ciudad de México, Cancún y Los Cabos.",
+      bios: {
+        "jesus-contreras-licea":
+          "Socio en Robles & Co y BaRoCo Law en Los Cabos, Jesús ha cerrado más de 1,000 transacciones inmobiliarias y aporta más de 15 años de experiencia en derecho financiero, incluyendo puestos directivos en HSBC México y despachos de primer nivel. También imparte la cátedra de Derecho Corporativo, Cripto y Fintech en la Universidad Anáhuac. De Cancún a la Ciudad de México, atiende asuntos en toda la jurisdicción de México.",
+        "angel-robles-santisteban":
+          "Socio en Robles & Co y BaRoCo Law en Los Cabos, Ángel aporta más de 18 años de experiencia en derecho inmobiliario, con amplia experiencia en asuntos civiles, fiscales y del registro público de la propiedad. Ha guiado a individuos, familias y constructoras a través de cada etapa de la adquisición y regularización de propiedades. De la Ciudad de México a Cancún, atiende asuntos en todo el país.",
+      },
     },
     services: {
       heading: "Áreas de práctica",
@@ -284,9 +303,9 @@ export const translations: Record<Language, Translation> = {
         "real-estate": {
           title: "Bienes Raíces",
           teaser:
-            "Guiamos a compradores y vendedores en cada etapa de una transacción inmobiliaria en México — desde la oferta inicial hasta el cierre, la coordinación notarial y la revisión de título.",
+            "Guiamos a compradores y vendedores en cada etapa de una transacción inmobiliaria en México, desde la oferta inicial hasta el cierre, la coordinación notarial y la revisión de título.",
           summary:
-            "Guiamos a compradores y vendedores en cada etapa de una transacción inmobiliaria en México — desde la oferta inicial hasta el cierre, la coordinación notarial y la revisión de título. Nuestra fortaleza particular son las compras transfronterizas: ayudamos a compradores extranjeros a navegar estructuras de fideicomiso, obligaciones fiscales y requisitos regulatorios específicos para extranjeros que adquieren propiedades en la Ciudad de México y Cancún.",
+            "Guiamos a compradores y vendedores en cada etapa de una transacción inmobiliaria en México, desde la oferta inicial hasta el cierre, la coordinación notarial y la revisión de título. Nuestra fortaleza particular son las compras transfronterizas: ayudamos a compradores extranjeros a navegar estructuras de fideicomiso, obligaciones fiscales y requisitos regulatorios específicos para extranjeros que adquieren propiedades en la Ciudad de México y Cancún.",
           whatWeHandle: [
             "Contratos de compraventa",
             "Revisión de título y debida diligencia",
@@ -298,9 +317,9 @@ export const translations: Record<Language, Translation> = {
         "corporate-ma": {
           title: "Corporativo, Fusiones y Adquisiciones",
           teaser:
-            "Asesoramos a empresas durante todo el ciclo de vida de las transacciones corporativas — desde la constitución y gobierno corporativo hasta fusiones, adquisiciones y levantamiento de capital.",
+            "Asesoramos a empresas durante todo el ciclo de vida de las transacciones corporativas, desde la constitución y gobierno corporativo hasta fusiones, adquisiciones y levantamiento de capital.",
           summary:
-            "Asesoramos a empresas durante todo el ciclo de vida de las transacciones corporativas — desde la constitución y el gobierno corporativo hasta fusiones, adquisiciones y levantamiento de capital. Nuestro equipo estructura operaciones tanto para entidades nacionales como extranjeras en los sectores civil, comercial y financiero.",
+            "Asesoramos a empresas durante todo el ciclo de vida de las transacciones corporativas, desde la constitución y el gobierno corporativo hasta fusiones, adquisiciones y levantamiento de capital. Nuestro equipo estructura operaciones tanto para entidades nacionales como extranjeras en los sectores civil, comercial y financiero.",
           whatWeHandle: [
             "Constitución de empresas y gobierno corporativo",
             "Estructuración de F&A y debida diligencia",
@@ -324,9 +343,9 @@ export const translations: Record<Language, Translation> = {
         "blockchain-fintech": {
           title: "Blockchain, Activos Digitales y Fintech",
           teaser:
-            "Estamos a la vanguardia del panorama evolutivo de activos digitales en México — asesorando en proyectos de tokenización, formación de SOFIPOs y los marcos regulatorios que rigen los criptoactivos y las operaciones fintech.",
+            "Estamos a la vanguardia del panorama evolutivo de activos digitales en México. Asesoramos en proyectos de tokenización, formación de SOFIPOs y los marcos regulatorios que rigen los criptoactivos y las operaciones fintech.",
           summary:
-            "Estamos a la vanguardia del panorama evolutivo de activos digitales en México — asesorando en proyectos de tokenización, formación de SOFIPOs y los marcos regulatorios que rigen los criptoactivos y las operaciones fintech. Pocas firmas en México combinan experiencia en bienes raíces con este nivel de dominio en blockchain.",
+            "Estamos a la vanguardia del panorama evolutivo de activos digitales en México. Asesoramos en proyectos de tokenización, formación de SOFIPOs y los marcos regulatorios que rigen los criptoactivos y las operaciones fintech. Pocas firmas en México combinan experiencia en bienes raíces con este nivel de dominio en blockchain.",
           whatWeHandle: [
             "Emisión y estructuración de tokens",
             "Formación y licenciamiento de SOFIPOs",
@@ -337,9 +356,9 @@ export const translations: Record<Language, Translation> = {
         "tax-trusts": {
           title: "Fiscal y Fideicomisos",
           teaser:
-            "Brindamos asesoría fiscal en transacciones inmobiliarias y corporativas, y estructuramos fideicomisos para planificación patrimonial, protección de activos y fines de inversión — un área que se relaciona estrechamente con nuestras prácticas de bienes raíces y blockchain.",
+            "Brindamos asesoría fiscal en transacciones inmobiliarias y corporativas, y estructuramos fideicomisos para planificación patrimonial, protección de activos y fines de inversión. Esta es un área que se relaciona estrechamente con nuestras prácticas de bienes raíces y blockchain.",
           summary:
-            "Brindamos asesoría fiscal en transacciones inmobiliarias y corporativas, y estructuramos fideicomisos para planificación patrimonial, protección de activos y fines de inversión — un área que se relaciona estrechamente con nuestras prácticas de bienes raíces y blockchain.",
+            "Brindamos asesoría fiscal en transacciones inmobiliarias y corporativas, y estructuramos fideicomisos para planificación patrimonial, protección de activos y fines de inversión. Esta es un área que se relaciona estrechamente con nuestras prácticas de bienes raíces y blockchain.",
           whatWeHandle: [
             "Asesoría fiscal transaccional",
             "Estructuración de fideicomisos",
@@ -350,9 +369,9 @@ export const translations: Record<Language, Translation> = {
         "civil-family-disputes": {
           title: "Civil, Familiar y Litigios",
           teaser:
-            "Manejamos una amplia gama de asuntos civiles y familiares, desde planificación patrimonial y herencias hasta contratos comerciales y resolución de disputas — con una tasa de éxito del 89% en casos litigados.",
+            "Manejamos una amplia gama de asuntos civiles y familiares, desde planificación patrimonial y herencias hasta contratos comerciales y resolución de disputas, con una tasa de éxito del 89% en casos litigados.",
           summary:
-            "Manejamos una amplia gama de asuntos civiles y familiares, desde planificación patrimonial y herencias hasta contratos comerciales y resolución de disputas — con una tasa de éxito del 89% en casos litigados.",
+            "Manejamos una amplia gama de asuntos civiles y familiares, desde planificación patrimonial y herencias hasta contratos comerciales y resolución de disputas, con una tasa de éxito del 89% en casos litigados.",
           whatWeHandle: [
             "Derecho familiar y sucesiones",
             "Contratos civiles y comerciales",
@@ -401,7 +420,7 @@ export const translations: Record<Language, Translation> = {
     careers: {
       heading: "Únete a Robles & Co",
       intro:
-        "Trabajamos con abogados en cada etapa de su carrera — desde quienes buscan realizar asesorías independientes junto con nosotros, hasta abogados con experiencia que buscan una posición a largo plazo, y despachos con los que ocasionalmente nos asociamos o incorporamos para asuntos especializados. Si eres abogado y buscas hacer crecer tu práctica, nos encantaría saber de ti.",
+        "Trabajamos con abogados en cada etapa de su carrera, desde quienes buscan realizar asesorías independientes junto con nosotros, hasta abogados con experiencia que buscan una posición a largo plazo, y despachos con los que ocasionalmente nos asociamos o incorporamos para asuntos especializados. Si eres abogado y buscas hacer crecer tu práctica, nos encantaría saber de ti.",
       form: {
         name: "Nombre",
         namePlaceholder: "Tu nombre completo",

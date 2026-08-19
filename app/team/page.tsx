@@ -72,7 +72,7 @@ export default function TeamPage() {
                 </p>
 
                 <p className="mt-2 text-center text-sm text-gray-600">
-                  {member.bio}
+                  {t.team.bios[member.slug]}
                 </p>
 
                 <div className="mt-4 flex justify-center">
