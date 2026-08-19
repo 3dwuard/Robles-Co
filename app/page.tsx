@@ -308,12 +308,12 @@ export default function Home() {
           </a>
         </div>
 
-        <div className="mx-auto mt-4 flex max-w-4xl flex-col items-center gap-2 border-t border-gray-100 pt-4 text-[11px] text-gray-400 sm:flex-row sm:justify-between sm:gap-4">
+        <div className="mx-auto mt-4 flex max-w-4xl flex-col items-center gap-2 border-t border-gray-100 pt-4 text-[11px] text-gray-400 sm:flex-row sm:justify-center sm:gap-4">
           <p>{t.footer.copyright}</p>
           <div className="flex items-center gap-2">
             <Link
               href="/aviso-de-privacidad"
-              className="transition-colors hover:text-[#ad8a4e]"
+              className="underline underline-offset-2 transition-colors hover:text-gray-600"
             >
               {t.footer.privacyLink}
             </Link>
