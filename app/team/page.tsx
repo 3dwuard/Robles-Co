@@ -49,49 +49,59 @@ export default function TeamPage() {
             {t.team.pageHeading}
           </h1>
 
-          <div className="mt-12 flex flex-wrap justify-center gap-8 sm:justify-start md:gap-12">
+          <div className="mt-12 flex flex-wrap justify-center gap-8 sm:justify-start md:flex-col md:gap-8">
             {teamMembers.map((member) => (
               <div
                 key={member.name}
-                className="w-full max-w-xs rounded-xl border border-gray-200 p-6 sm:w-72 md:w-96 md:p-8"
+                className="w-full max-w-xs rounded-xl border border-gray-200 p-6 sm:w-72 md:w-full md:max-w-none md:grid md:grid-cols-2 md:gap-10 md:p-8"
               >
-                <Image
-                  src={member.secondaryPhoto}
-                  alt={member.name}
-                  width={200}
-                  height={200}
-                  className="mx-auto h-24 w-24 rounded-full object-cover md:h-[200px] md:w-[200px]"
-                />
+                <div className="md:self-center">
+                  <Image
+                    src={member.secondaryPhoto}
+                    alt={member.name}
+                    width={200}
+                    height={200}
+                    className="mx-auto h-24 w-24 rounded-full object-cover object-top md:h-[200px] md:w-[200px]"
+                  />
 
-                <h2 className="mt-4 text-center font-serif text-lg text-gray-900">
-                  {member.name}
-                </h2>
+                  <h2 className="mt-4 text-center font-serif text-lg text-gray-900">
+                    {member.name}
+                  </h2>
 
-                <p className="mt-1 text-center text-sm text-gray-500">
-                  {member.title}
-                </p>
+                  <p className="mt-1 text-center text-sm text-gray-500">
+                    {member.title}
+                  </p>
 
-                <p className="mt-2 text-center text-sm text-gray-600">
-                  {t.team.bios[member.slug]}
-                </p>
+                  <p className="mt-2 text-center text-sm text-gray-600">
+                    {t.team.bios[member.slug]}
+                  </p>
+
+                  <Image
+                    src={member.casualPhoto}
+                    alt={`${member.name}, informal`}
+                    width={320}
+                    height={224}
+                    className="mx-auto mt-4 h-28 w-40 rounded-lg border border-gray-200 object-cover md:hidden"
+                  />
+
+                  <div className="mt-4 flex justify-center">
+                    <a
+                      href="#"
+                      aria-label={`${member.name} on LinkedIn`}
+                      className="text-gray-400 transition-colors hover:text-gray-900"
+                    >
+                      <LinkedinIcon className="h-5 w-5" />
+                    </a>
+                  </div>
+                </div>
 
                 <Image
                   src={member.casualPhoto}
                   alt={`${member.name}, informal`}
-                  width={320}
-                  height={224}
-                  className="mx-auto mt-4 h-28 w-40 rounded-lg border border-gray-200 object-cover md:h-56 md:w-80"
+                  width={400}
+                  height={500}
+                  className="hidden rounded-lg border border-gray-200 object-cover md:block md:h-full md:w-full md:max-w-[400px] md:justify-self-center"
                 />
-
-                <div className="mt-4 flex justify-center">
-                  <a
-                    href="#"
-                    aria-label={`${member.name} on LinkedIn`}
-                    className="text-gray-400 transition-colors hover:text-gray-900"
-                  >
-                    <LinkedinIcon className="h-5 w-5" />
-                  </a>
-                </div>
               </div>
             ))}
           </div>
