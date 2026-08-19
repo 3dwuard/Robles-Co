@@ -69,7 +69,7 @@ export default function TeamPage() {
                   </h2>
 
                   <p className="mt-1 text-center text-sm text-gray-500">
-                    {member.title}
+                    {t.team.titles[member.slug]}
                   </p>
 
                   <p className="mt-2 text-center text-sm text-gray-600">

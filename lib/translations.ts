@@ -31,6 +31,7 @@ type Translation = {
     heading: string;
     pageHeading: string;
     associatesNote: string;
+    titles: Record<TeamMemberSlug, string>;
     bios: Record<TeamMemberSlug, string>;
   };
   services: {
@@ -77,7 +78,7 @@ export const translations: Record<Language, Translation> = {
       careers: "Careers",
     },
     hero: {
-      headline: "Trusted legal counsel for Mexico's most complex matters",
+      headline: "Trusted legal counsel for Mexico's complex matters",
       subtext:
         "From real estate to corporate, tax, and emerging finance, we provide full-service legal representation across Mexico.",
     },
@@ -96,6 +97,10 @@ export const translations: Record<Language, Translation> = {
       pageHeading: "Our Partners",
       associatesNote:
         "Our partners are supported by a growing team of associates and legal staff across Mexico City, Cancún, and Los Cabos.",
+      titles: {
+        "jesus-contreras-licea": "Partner, Real Estate & Financial Law",
+        "angel-robles-santisteban": "Partner, Real Estate & Tax Law",
+      },
       bios: {
         "jesus-contreras-licea":
           "Partner at Robles & Co and BaRoCo Law in Los Cabos, Jesús has closed over 1,000 real estate transactions and brings 15+ years of experience in financial law, including senior roles at HSBC Mexico and top-tier firms. He also teaches Corporate Law, Crypto & Fintech at Universidad Anáhuac. From Cancún to Mexico City, he handles matters across Mexico's full jurisdiction.",
@@ -193,34 +198,34 @@ export const translations: Record<Language, Translation> = {
       continueReading: "Continue reading",
       items: [
         {
-          tag: "Cancún · land purchase",
+          tag: "Mexico City · landmark redevelopment",
           description:
-            "Guided a foreign buyer through a beachfront land acquisition, structuring the transaction inside a compliant fideicomiso.",
+            "Secured government authorization to demolish an earthquake-damaged building in La Condesa following the 2017 earthquake, clearing the way for one of the area's most significant redevelopments.",
         },
         {
-          tag: "Mexico City · title dispute",
+          tag: "Cancún · brand relaunch & rights integration",
           description:
-            "Resolved a contested property title by tracing the chain of ownership back through three prior sales.",
+            "Structured the launch and integration of over 300 stakeholders holding different rights, from hotel to private club, relocating them into a new development to support a major brand's relaunch.",
         },
         {
-          tag: "Cancún · residency & purchase",
+          tag: "Cancún–Tulum · large-scale land acquisition",
           description:
-            "Coordinated a home purchase alongside a temporary residency application for a relocating family.",
+            "Advised on one of the largest land acquisitions ever assembled in the Cancún–Tulum corridor for a major regional development.",
         },
         {
-          tag: "Mexico City · fideicomiso structuring",
+          tag: "Mexico City · high-net-worth real estate",
           description:
-            "Structured a fideicomiso for a foreign family acquiring a residential property, ensuring full compliance with restricted-zone regulations.",
+            "Guided high-net-worth and politically exposed clients through real estate transactions in some of Mexico City's most emblematic developments, protecting their wealth and optimizing returns.",
         },
         {
-          tag: "Cancún · developer contract review",
+          tag: "Nationwide · developer marketing strategy",
           description:
-            "Reviewed and renegotiated a pre-construction contract, adding buyer protections against delivery delays.",
+            "Advised leading developers on innovative approaches to marketing residential projects, from lifestyle branding to blockchain-based sales structures.",
         },
         {
-          tag: "Mexico City · corporate restructuring",
+          tag: "Nationwide · foreign investment & restricted zones",
           description:
-            "Advised a mid-size company through a merger, coordinating due diligence and regulatory filings.",
+            "Advised hundreds of foreign clients on acquiring property and structuring investment in Cancún and other restricted zones across Mexico.",
         },
       ],
     },
@@ -270,7 +275,7 @@ export const translations: Record<Language, Translation> = {
       careers: "Carreras",
     },
     hero: {
-      headline: "Asesoría legal de confianza para los asuntos más complejos de México",
+      headline: "Asesoría legal de confianza para los asuntos complejos de México",
       subtext:
         "De bienes raíces a derecho corporativo, fiscal y finanzas emergentes, ofrecemos representación legal integral en todo México.",
     },
@@ -289,6 +294,10 @@ export const translations: Record<Language, Translation> = {
       pageHeading: "Nuestros Socios",
       associatesNote:
         "Nuestros socios cuentan con el respaldo de un equipo creciente de asociados y personal legal en la Ciudad de México, Cancún y Los Cabos.",
+      titles: {
+        "jesus-contreras-licea": "Socio, Derecho Inmobiliario y Financiero",
+        "angel-robles-santisteban": "Socio, Derecho Inmobiliario y Fiscal",
+      },
       bios: {
         "jesus-contreras-licea":
           "Socio en Robles & Co y BaRoCo Law en Los Cabos, Jesús ha cerrado más de 1,000 transacciones inmobiliarias y aporta más de 15 años de experiencia en derecho financiero, incluyendo puestos directivos en HSBC México y despachos de primer nivel. También imparte la cátedra de Derecho Corporativo, Cripto y Fintech en la Universidad Anáhuac. De Cancún a la Ciudad de México, atiende asuntos en toda la jurisdicción de México.",
@@ -386,34 +395,34 @@ export const translations: Record<Language, Translation> = {
       continueReading: "Seguir leyendo",
       items: [
         {
-          tag: "Cancún · compra de terreno",
+          tag: "Mexico City · landmark redevelopment",
           description:
-            "Guiamos a un comprador extranjero en la adquisición de un terreno frente a la playa, estructurando la transacción dentro de un fideicomiso conforme a la normativa.",
+            "Obtuvimos la autorización gubernamental para demoler un edificio dañado por el sismo de 2017 en la Condesa, abriendo paso a uno de los redesarrollos más importantes de la zona.",
         },
         {
-          tag: "Ciudad de México · disputa de título",
+          tag: "Cancún · brand relaunch & rights integration",
           description:
-            "Resolvimos una disputa sobre el título de una propiedad, rastreando la cadena de propiedad a través de tres ventas anteriores.",
+            "Estructuramos el lanzamiento e integración de más de 300 titulares de derechos, desde hotel hasta club privado, reubicándolos en un nuevo desarrollo para respaldar el relanzamiento de una marca importante.",
         },
         {
-          tag: "Cancún · residencia y compra",
+          tag: "Cancún–Tulum · large-scale land acquisition",
           description:
-            "Coordinamos la compra de una vivienda junto con una solicitud de residencia temporal para una familia que se reubicaba.",
+            "Asesoramos una de las mayores adquisiciones de tierra realizadas en el corredor Cancún-Tulum para un desarrollo de gran relevancia regional.",
         },
         {
-          tag: "Ciudad de México · estructuración de fideicomiso",
+          tag: "Mexico City · high-net-worth real estate",
           description:
-            "Estructuramos un fideicomiso para una familia extranjera que adquiría una propiedad residencial, garantizando el pleno cumplimiento de las regulaciones de zona restringida.",
+            "Acompañamos a clientes de alto patrimonio y políticamente expuestos en operaciones inmobiliarias dentro de algunos de los desarrollos más emblemáticos de la Ciudad de México, protegiendo su patrimonio y optimizando sus rendimientos.",
         },
         {
-          tag: "Cancún · revisión de contrato con desarrollador",
+          tag: "Nationwide · developer marketing strategy",
           description:
-            "Revisamos y renegociamos un contrato de preventa, añadiendo protecciones para el comprador contra retrasos en la entrega.",
+            "Asesoramos a desarrolladores líderes en nuevas formas de comercializar sus proyectos residenciales, desde estrategias de marca hasta esquemas de venta con tecnología blockchain.",
         },
         {
-          tag: "Ciudad de México · reestructuración corporativa",
+          tag: "Nationwide · foreign investment & restricted zones",
           description:
-            "Asesoramos a una empresa mediana en una fusión, coordinando la debida diligencia y los trámites regulatorios.",
+            "Hemos asesorado a cientos de clientes extranjeros en la adquisición de propiedades e inversión en Cancún y otras zonas restringidas del país.",
         },
       ],
     },

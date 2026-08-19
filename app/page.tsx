@@ -218,7 +218,7 @@ export default function Home() {
                   className="h-40 w-40 rounded-full object-cover"
                 />
                 <p className="mt-6 font-serif text-lg text-gray-900">{member.name}</p>
-                <p className="mt-2 text-sm text-gray-500">{member.title}</p>
+                <p className="mt-2 text-sm text-gray-500">{t.team.titles[member.slug]}</p>
               </Link>
             ))}
           </div>
