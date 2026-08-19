@@ -3,11 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { practiceAreas } from "@/data/practiceAreas";
+import { useTranslation } from "@/lib/LanguageContext";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const inputClass =
   "rounded-lg border border-gray-200 px-4 py-2.5 text-sm text-gray-800 outline-none focus:border-gray-400";
 
 export default function CareersPage() {
+  const { t } = useTranslation();
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
   }
@@ -15,10 +19,11 @@ export default function CareersPage() {
   return (
     <main className="flex min-h-screen flex-col items-center">
       <div className="w-full border-b border-gray-200">
-        <div className="mx-auto flex max-w-6xl items-center px-6 py-5">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
           <Link href="/" className="font-serif text-xl tracking-wide text-gray-900">
             Robles &amp; Co
           </Link>
+          <LanguageSwitcher />
         </div>
       </div>
 
@@ -28,7 +33,7 @@ export default function CareersPage() {
             href="/"
             className="text-sm text-gray-500 transition-colors hover:text-gray-900"
           >
-            ← Back to home
+            {t.common.backHome}
           </Link>
 
           <div className="relative mt-6 h-48 w-full overflow-hidden rounded-xl border border-gray-200 sm:h-64">
@@ -41,47 +46,43 @@ export default function CareersPage() {
           </div>
 
           <h1 className="mt-8 text-center font-serif text-3xl text-gray-900 sm:text-4xl">
-            Join Robles &amp; Co
+            {t.careers.heading}
           </h1>
 
           <p className="mt-5 text-center text-base text-gray-600 sm:text-lg">
-            We work with lawyers at every stage of their career — from those looking to take
-            on independent consulting work (asesorías) alongside us, to experienced attorneys
-            seeking a long-term position, to firms we occasionally partner with or bring in
-            for specialized matters. If you&apos;re a lawyer looking to grow your practice,
-            we&apos;d like to hear from you.
+            {t.careers.intro}
           </p>
 
           <form onSubmit={handleSubmit} className="mt-10 flex flex-col gap-4">
             <div className="flex flex-col gap-1.5">
               <label htmlFor="name" className="text-sm text-gray-700">
-                Name
+                {t.careers.form.name}
               </label>
               <input
                 id="name"
                 name="name"
                 type="text"
-                placeholder="Your full name"
+                placeholder={t.careers.form.namePlaceholder}
                 className={inputClass}
               />
             </div>
 
             <div className="flex flex-col gap-1.5">
               <label htmlFor="email" className="text-sm text-gray-700">
-                Email
+                {t.careers.form.email}
               </label>
               <input
                 id="email"
                 name="email"
                 type="email"
-                placeholder="you@example.com"
+                placeholder={t.careers.form.emailPlaceholder}
                 className={inputClass}
               />
             </div>
 
             <div className="flex flex-col gap-1.5">
               <label htmlFor="areaOfInterest" className="text-sm text-gray-700">
-                Area of interest
+                {t.careers.form.areaOfInterest}
               </label>
               <select
                 id="areaOfInterest"
@@ -90,11 +91,11 @@ export default function CareersPage() {
                 className={inputClass}
               >
                 <option value="" disabled>
-                  Select a practice area
+                  {t.careers.form.areaOfInterestPlaceholder}
                 </option>
                 {practiceAreas.map((area) => (
-                  <option key={area.slug} value={area.title}>
-                    {area.title}
+                  <option key={area.slug} value={t.services.areas[area.slug].title}>
+                    {t.services.areas[area.slug].title}
                   </option>
                 ))}
               </select>
@@ -102,13 +103,13 @@ export default function CareersPage() {
 
             <div className="flex flex-col gap-1.5">
               <label htmlFor="message" className="text-sm text-gray-700">
-                Message
+                {t.careers.form.message}
               </label>
               <textarea
                 id="message"
                 name="message"
                 rows={5}
-                placeholder="Tell us about your background and what you're looking for."
+                placeholder={t.careers.form.messagePlaceholder}
                 className={`${inputClass} resize-none`}
               />
             </div>
@@ -117,12 +118,12 @@ export default function CareersPage() {
               type="submit"
               className="mt-2 rounded-lg bg-gray-900 px-4 py-2.5 text-sm text-white transition-colors hover:bg-gray-800"
             >
-              Send
+              {t.careers.form.submit}
             </button>
           </form>
 
           <p className="mt-8 text-center text-sm text-gray-500">
-            Prefer to send your CV directly? Email us at{" "}
+            {t.careers.cvNote}{" "}
             <a
               href="mailto:careers@roblesandco.mx"
               className="text-gray-700 underline underline-offset-2 hover:text-gray-900"

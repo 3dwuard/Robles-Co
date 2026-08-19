@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { teamMembers } from "@/data/team";
+import { useTranslation } from "@/lib/LanguageContext";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 function LinkedinIcon({ className }: { className?: string }) {
   return (
@@ -16,16 +20,19 @@ function LinkedinIcon({ className }: { className?: string }) {
 }
 
 export default function TeamPage() {
+  const { t } = useTranslation();
+
   return (
     <main className="flex min-h-screen flex-col items-center">
       <div className="w-full border-b border-gray-200">
-        <div className="mx-auto flex max-w-6xl items-center px-6 py-5">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
           <Link
             href="/"
             className="font-serif text-xl tracking-wide text-gray-900"
           >
             Robles &amp; Co
           </Link>
+          <LanguageSwitcher />
         </div>
       </div>
 
@@ -35,11 +42,11 @@ export default function TeamPage() {
             href="/"
             className="text-sm text-gray-500 transition-colors hover:text-gray-900"
           >
-            ← Back to home
+            {t.common.backHome}
           </Link>
 
           <h1 className="mt-6 text-center font-serif text-3xl text-gray-900 sm:text-4xl">
-            Our Team
+            {t.team.pageHeading}
           </h1>
 
           <div className="mt-12 flex flex-wrap justify-center gap-8 sm:justify-start">

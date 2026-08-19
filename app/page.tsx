@@ -5,9 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, Menu, ShieldCheck, MapPin } from "lucide-react";
 import IntakePanel from "@/components/intake/IntakePanel";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { practiceAreas } from "@/data/practiceAreas";
 import { teamMembers } from "@/data/team";
-import { Language, translations } from "@/lib/translations";
+import { useTranslation } from "@/lib/LanguageContext";
 
 type NavLinkKey = "services" | "team" | "cases" | "careers";
 type NavLink = { key: NavLinkKey; href: string };
@@ -44,86 +45,10 @@ function NavAnchor({
   );
 }
 
-function LanguageSwitcher({
-  language,
-  setLanguage,
-  className = "",
-}: {
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  className?: string;
-}) {
-  return (
-    <div
-      className={`inline-flex items-center gap-0.5 rounded-full border border-gray-200 p-0.5 ${className}`}
-    >
-      <button
-        type="button"
-        onClick={() => setLanguage("EN")}
-        aria-pressed={language === "EN"}
-        className={`rounded-full px-2.5 py-1 text-xs transition-colors ${
-          language === "EN"
-            ? "bg-gray-900 text-white"
-            : "text-gray-500 hover:text-gray-900"
-        }`}
-      >
-        EN
-      </button>
-      <button
-        type="button"
-        onClick={() => setLanguage("ES")}
-        aria-pressed={language === "ES"}
-        className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-xs transition-colors ${
-          language === "ES"
-            ? "bg-gray-900 text-white"
-            : "text-gray-500 hover:text-gray-900"
-        }`}
-      >
-        <span aria-hidden="true">🇲🇽</span>
-        ES
-      </button>
-    </div>
-  );
-}
-
-const cases = [
-  {
-    tag: "Cancún · land purchase",
-    description:
-      "Guided a foreign buyer through a beachfront land acquisition, structuring the transaction inside a compliant fideicomiso.",
-  },
-  {
-    tag: "Mexico City · title dispute",
-    description:
-      "Resolved a contested property title by tracing the chain of ownership back through three prior sales.",
-  },
-  {
-    tag: "Cancún · residency & purchase",
-    description:
-      "Coordinated a home purchase alongside a temporary residency application for a relocating family.",
-  },
-  {
-    tag: "Mexico City · fideicomiso structuring",
-    description:
-      "Structured a fideicomiso for a foreign family acquiring a residential property, ensuring full compliance with restricted-zone regulations.",
-  },
-  {
-    tag: "Cancún · developer contract review",
-    description:
-      "Reviewed and renegotiated a pre-construction contract, adding buyer protections against delivery delays.",
-  },
-  {
-    tag: "Mexico City · corporate restructuring",
-    description:
-      "Advised a mid-size company through a merger, coordinating due diligence and regulatory filings.",
-  },
-];
-
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [language, setLanguage] = useState<Language>("EN");
   const [casesExpanded, setCasesExpanded] = useState(false);
-  const t = translations[language];
+  const { language, t } = useTranslation();
 
   return (
     <main className="flex min-h-screen flex-col items-center">
@@ -146,7 +71,7 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-            <LanguageSwitcher language={language} setLanguage={setLanguage} />
+            <LanguageSwitcher />
           </div>
 
           <button
@@ -174,7 +99,7 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-            <LanguageSwitcher language={language} setLanguage={setLanguage} />
+            <LanguageSwitcher />
           </div>
         )}
       </nav>
@@ -202,6 +127,18 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Stats */}
+      <section className="w-full border-t border-gray-200 px-6 py-14">
+        <div className="mx-auto grid max-w-4xl grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-4">
+          {t.stats.map((stat) => (
+            <div key={stat.caption} className="flex flex-col items-center text-center">
+              <p className="font-serif text-2xl text-gray-900 sm:text-3xl">{stat.value}</p>
+              <p className="mt-1.5 text-xs text-gray-500">{stat.caption}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Services */}
       <section id="services" className="w-full border-t border-gray-200 px-6 py-20">
         <div className="mx-auto max-w-5xl">
@@ -212,7 +149,7 @@ export default function Home() {
           <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {practiceAreas.map((area) => {
               const Icon = area.icon;
-              const teaser = t.services.teasers[area.slug as keyof typeof t.services.teasers];
+              const content = t.services.areas[area.slug];
 
               return (
                 <Link
@@ -223,8 +160,8 @@ export default function Home() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#ad8a4e]/40 bg-[#ad8a4e]/[0.06]">
                     <Icon className="h-6 w-6 text-[#ad8a4e]" />
                   </div>
-                  <h3 className="mt-4 font-serif text-lg text-gray-900">{area.title}</h3>
-                  <p className="mt-2 text-sm text-gray-600">{teaser}</p>
+                  <h3 className="mt-4 font-serif text-lg text-gray-900">{content.title}</h3>
+                  <p className="mt-2 text-sm text-gray-600">{content.teaser}</p>
                 </Link>
               );
             })}
@@ -258,6 +195,10 @@ export default function Home() {
               </Link>
             ))}
           </div>
+
+          <p className="mx-auto mt-10 max-w-md text-center text-sm text-gray-500">
+            {t.team.associatesNote}
+          </p>
         </div>
       </section>
 
@@ -274,7 +215,7 @@ export default function Home() {
           </h2>
 
           <div className="mt-10 flex flex-col">
-            {cases.slice(0, 3).map((item, i) => (
+            {t.cases.items.slice(0, 3).map((item, i) => (
               <div
                 key={item.tag}
                 className={`py-6 ${i !== 0 ? "border-t border-gray-200" : ""}`}
@@ -296,7 +237,7 @@ export default function Home() {
           >
             <div className="min-h-0 overflow-hidden">
               <div className="flex flex-col">
-                {cases.slice(3).map((item) => (
+                {t.cases.items.slice(3).map((item) => (
                   <div key={item.tag} className="border-t border-gray-200 py-6">
                     <p className="font-mono text-xs uppercase tracking-wide text-gray-400">
                       {item.tag}
@@ -317,7 +258,7 @@ export default function Home() {
                 onClick={() => setCasesExpanded(true)}
                 className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 px-4 py-2 text-sm text-gray-600 transition-colors hover:border-gray-400 hover:text-gray-900"
               >
-                Continue reading
+                {t.cases.continueReading}
                 <ChevronDown className="h-4 w-4" />
               </button>
             </div>

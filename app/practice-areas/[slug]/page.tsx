@@ -1,23 +1,30 @@
+"use client";
+
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { practiceAreas } from "@/data/practiceAreas";
+import { useTranslation } from "@/lib/LanguageContext";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function PracticeAreaPage({ params }: { params: { slug: string } }) {
   const practiceArea = practiceAreas.find((area) => area.slug === params.slug);
+  const { t } = useTranslation();
 
   if (!practiceArea) {
     notFound();
   }
 
-  const { title, icon: Icon, summary, whatWeHandle } = practiceArea;
+  const { icon: Icon } = practiceArea;
+  const content = t.services.areas[practiceArea.slug];
 
   return (
     <main className="flex min-h-screen flex-col items-center">
       <div className="w-full border-b border-gray-200">
-        <div className="mx-auto flex max-w-6xl items-center px-6 py-5">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
           <Link href="/" className="font-serif text-xl tracking-wide text-gray-900">
             Robles &amp; Co
           </Link>
+          <LanguageSwitcher />
         </div>
       </div>
 
@@ -27,7 +34,7 @@ export default function PracticeAreaPage({ params }: { params: { slug: string } 
             href="/"
             className="text-sm text-gray-500 transition-colors hover:text-gray-900"
           >
-            ← Back to home
+            {t.common.backHome}
           </Link>
 
           <div className="mt-10 flex flex-col items-center text-center">
@@ -35,17 +42,19 @@ export default function PracticeAreaPage({ params }: { params: { slug: string } 
               <Icon className="h-8 w-8 text-[#ad8a4e]" />
             </div>
 
-            <h1 className="mt-6 font-serif text-3xl text-gray-900 sm:text-4xl">{title}</h1>
+            <h1 className="mt-6 font-serif text-3xl text-gray-900 sm:text-4xl">
+              {content.title}
+            </h1>
 
-            <p className="mt-5 text-base text-gray-600 sm:text-lg">{summary}</p>
+            <p className="mt-5 text-base text-gray-600 sm:text-lg">{content.summary}</p>
           </div>
 
           <div className="mt-12">
             <p className="font-mono text-xs uppercase tracking-wide text-gray-400">
-              What we handle
+              {t.services.whatWeHandleLabel}
             </p>
             <ul className="mt-4 flex flex-col gap-3">
-              {whatWeHandle.map((item) => (
+              {content.whatWeHandle.map((item) => (
                 <li key={item} className="flex items-start gap-2 text-gray-800">
                   <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#ad8a4e]" />
                   <span>{item}</span>
