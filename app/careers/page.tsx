@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { practiceAreas } from "@/data/practiceAreas";
+import { teamMembers } from "@/data/team";
 import { useTranslation } from "@/lib/LanguageContext";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import FadeInSection from "@/components/FadeInSection";
@@ -37,13 +38,20 @@ export default function CareersPage() {
             {t.common.backHome}
           </Link>
 
-          <div className="relative mt-6 h-48 w-full overflow-hidden rounded-xl border border-gray-200 sm:h-64">
-            <Image
-              src="/team/jesus-casual.jpeg"
-              alt="Robles & Co team"
-              fill
-              className="object-cover"
-            />
+          <div className="mt-6 grid grid-cols-2 gap-2 sm:gap-3">
+            {teamMembers.map((member) => (
+              <div
+                key={member.slug}
+                className="relative h-48 w-full overflow-hidden rounded-xl border border-gray-200 sm:h-64"
+              >
+                <Image
+                  src={member.casualPhoto}
+                  alt={member.name}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ))}
           </div>
 
           <h1 className="mt-8 text-center font-serif text-3xl text-gray-900 sm:text-4xl">

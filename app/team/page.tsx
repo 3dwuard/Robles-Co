@@ -56,7 +56,7 @@ export default function TeamPage() {
                 className="w-full max-w-xs rounded-xl border border-gray-200 p-6 sm:w-72"
               >
                 <Image
-                  src={member.photo}
+                  src={member.secondaryPhoto}
                   alt={member.name}
                   width={96}
                   height={96}
@@ -74,6 +74,14 @@ export default function TeamPage() {
                 <p className="mt-2 text-center text-sm text-gray-600">
                   {t.team.bios[member.slug]}
                 </p>
+
+                <Image
+                  src={member.casualPhoto}
+                  alt={`${member.name}, informal`}
+                  width={160}
+                  height={112}
+                  className="mx-auto mt-4 h-28 w-40 rounded-lg border border-gray-200 object-cover"
+                />
 
                 <div className="mt-4 flex justify-center">
                   <a
