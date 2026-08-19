@@ -37,7 +37,7 @@ export default function TeamPage() {
       </div>
 
       <section className="w-full px-6 py-16 sm:py-20">
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-4xl md:max-w-6xl">
           <Link
             href="/"
             className="text-sm text-gray-500 transition-colors hover:text-gray-900"
@@ -49,18 +49,18 @@ export default function TeamPage() {
             {t.team.pageHeading}
           </h1>
 
-          <div className="mt-12 flex flex-wrap justify-center gap-8 sm:justify-start">
+          <div className="mt-12 flex flex-wrap justify-center gap-8 sm:justify-start md:gap-12">
             {teamMembers.map((member) => (
               <div
                 key={member.name}
-                className="w-full max-w-xs rounded-xl border border-gray-200 p-6 sm:w-72"
+                className="w-full max-w-xs rounded-xl border border-gray-200 p-6 sm:w-72 md:w-96 md:p-8"
               >
                 <Image
                   src={member.secondaryPhoto}
                   alt={member.name}
-                  width={96}
-                  height={96}
-                  className="mx-auto h-24 w-24 rounded-full object-cover"
+                  width={200}
+                  height={200}
+                  className="mx-auto h-24 w-24 rounded-full object-cover md:h-[200px] md:w-[200px]"
                 />
 
                 <h2 className="mt-4 text-center font-serif text-lg text-gray-900">
@@ -78,9 +78,9 @@ export default function TeamPage() {
                 <Image
                   src={member.casualPhoto}
                   alt={`${member.name}, informal`}
-                  width={160}
-                  height={112}
-                  className="mx-auto mt-4 h-28 w-40 rounded-lg border border-gray-200 object-cover"
+                  width={320}
+                  height={224}
+                  className="mx-auto mt-4 h-28 w-40 rounded-lg border border-gray-200 object-cover md:h-56 md:w-80"
                 />
 
                 <div className="mt-4 flex justify-center">
