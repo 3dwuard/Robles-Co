@@ -94,6 +94,6 @@ export const FIRM_CONTACT = {
   phone: "+52 998 123 4567",
   phoneHref: "tel:+529981234567",
   whatsappHref: "https://wa.me/529981234567",
-  email: "hello@roblesandco.mx",
-  emailHref: "mailto:hello@roblesandco.mx",
+  email: "contacto@roblesandco.mx",
+  emailHref: "mailto:contacto@roblesandco.mx",
 };

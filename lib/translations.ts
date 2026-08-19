@@ -56,7 +56,19 @@ type Translation = {
     };
     cvNote: string;
   };
-  footer: { text: string };
+  footer: { text: string; privacyLink: string };
+  privacy: {
+    heading: string;
+    lastUpdated: string;
+    intro: string;
+    sections: {
+      dataCollected: { heading: string; body: string };
+      purposes: { heading: string; body: string };
+      transfers: { heading: string; body: string };
+      arcoRights: { heading: string; body: string };
+      changes: { heading: string; body: string };
+    };
+  };
   funnel: {
     whatCanWeHelp: string;
     tellUsSituation: string;
@@ -87,7 +99,7 @@ export const translations: Record<Language, Translation> = {
       locations: "CDMX & Cancún",
     },
     stats: [
-      { value: "19+", caption: "Years Combined Experience" },
+      { value: "25+", caption: "Years Combined Experience" },
       { value: "1,000+", caption: "Transactions Closed" },
       { value: "6", caption: "Practice Areas" },
       { value: "Nationwide", caption: "Coverage" },
@@ -194,23 +206,23 @@ export const translations: Record<Language, Translation> = {
       },
     },
     cases: {
-      heading: "Cases we've handled",
+      heading: "Selected matters we've handled",
       continueReading: "Continue reading",
       items: [
-        {
-          tag: "Mexico City · landmark redevelopment",
-          description:
-            "Secured government authorization to demolish an earthquake-damaged building in La Condesa following the 2017 earthquake, clearing the way for one of the area's most significant redevelopments.",
-        },
-        {
-          tag: "Cancún · brand relaunch & rights integration",
-          description:
-            "Structured the launch and integration of over 300 stakeholders holding different rights, from hotel to private club, relocating them into a new development to support a major brand's relaunch.",
-        },
         {
           tag: "Cancún–Tulum · large-scale land acquisition",
           description:
             "Advised on one of the largest land acquisitions ever assembled in the Cancún–Tulum corridor for a major regional development.",
+        },
+        {
+          tag: "Cancún · brand relaunch & rights integration",
+          description:
+            "Structured the launch and integration of over 300 stakeholders holding different rights, from hotel to private club, relocating them into a new development to support one of the most emblematic brand relaunches in the region.",
+        },
+        {
+          tag: "Mexico City · landmark redevelopment",
+          description:
+            "Secured government authorization to demolish an earthquake-damaged building in La Condesa following the 2017 earthquake, clearing the way for one of the area's most significant redevelopments.",
         },
         {
           tag: "Mexico City · high-net-worth real estate",
@@ -248,6 +260,35 @@ export const translations: Record<Language, Translation> = {
     },
     footer: {
       text: "Created by JECL · Powered by AI · 2026",
+      privacyLink: "Privacy Notice",
+    },
+    privacy: {
+      heading: "Privacy Notice",
+      lastUpdated: "Last updated: August 2026",
+      intro:
+        "Robles & Co is responsible for the processing of your personal data in accordance with Mexico's Federal Law on the Protection of Personal Data Held by Private Parties (LFPDPPP).",
+      sections: {
+        dataCollected: {
+          heading: "Data we collect",
+          body: "Name, email address, phone number, and the description of your legal situation, including any documents you choose to share with us.",
+        },
+        purposes: {
+          heading: "Purposes",
+          body: "We use your data to respond to your inquiry, provide legal advice, and follow up on your case. If we contact you with information about our services, you may request at any time that we stop doing so.",
+        },
+        transfers: {
+          heading: "Data transfers",
+          body: "Your data may be shared with notaries, authorities, or third parties only when necessary to manage your legal matter, and always under strict confidentiality.",
+        },
+        arcoRights: {
+          heading: "ARCO rights",
+          body: "You have the right to access, rectify, cancel, or object to the use of your personal data. To exercise these rights, contact us at contacto@roblesandco.mx.",
+        },
+        changes: {
+          heading: "Changes to this notice",
+          body: "Any modification to this notice will be published on this same page.",
+        },
+      },
     },
     funnel: {
       whatCanWeHelp: "What can we help you with?",
@@ -284,7 +325,7 @@ export const translations: Record<Language, Translation> = {
       locations: "CDMX y Cancún",
     },
     stats: [
-      { value: "19+", caption: "Años de Experiencia Combinada" },
+      { value: "25+", caption: "Años de Experiencia Combinada" },
       { value: "1,000+", caption: "Transacciones Cerradas" },
       { value: "6", caption: "Áreas de Práctica" },
       { value: "Nacional", caption: "Cobertura" },
@@ -391,23 +432,23 @@ export const translations: Record<Language, Translation> = {
       },
     },
     cases: {
-      heading: "Casos que hemos manejado",
+      heading: "Asuntos representativos que hemos manejado",
       continueReading: "Seguir leyendo",
       items: [
-        {
-          tag: "Mexico City · landmark redevelopment",
-          description:
-            "Obtuvimos la autorización gubernamental para demoler un edificio dañado por el sismo de 2017 en la Condesa, abriendo paso a uno de los redesarrollos más importantes de la zona.",
-        },
-        {
-          tag: "Cancún · brand relaunch & rights integration",
-          description:
-            "Estructuramos el lanzamiento e integración de más de 300 titulares de derechos, desde hotel hasta club privado, reubicándolos en un nuevo desarrollo para respaldar el relanzamiento de una marca importante.",
-        },
         {
           tag: "Cancún–Tulum · large-scale land acquisition",
           description:
             "Asesoramos una de las mayores adquisiciones de tierra realizadas en el corredor Cancún-Tulum para un desarrollo de gran relevancia regional.",
+        },
+        {
+          tag: "Cancún · brand relaunch & rights integration",
+          description:
+            "Estructuramos el lanzamiento e integración de más de 300 titulares de derechos, desde hotel hasta club privado, reubicándolos en un nuevo desarrollo para respaldar uno de los relanzamientos de marca más emblemáticos de la región.",
+        },
+        {
+          tag: "Mexico City · landmark redevelopment",
+          description:
+            "Obtuvimos la autorización gubernamental para demoler un edificio dañado por el sismo de 2017 en la Condesa, abriendo paso a uno de los redesarrollos más importantes de la zona.",
         },
         {
           tag: "Mexico City · high-net-worth real estate",
@@ -445,6 +486,35 @@ export const translations: Record<Language, Translation> = {
     },
     footer: {
       text: "Creado por JECL · Impulsado por IA · 2026",
+      privacyLink: "Aviso de Privacidad",
+    },
+    privacy: {
+      heading: "Aviso de Privacidad",
+      lastUpdated: "Última actualización: agosto de 2026",
+      intro:
+        "Robles & Co es responsable del tratamiento de sus datos personales de conformidad con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP).",
+      sections: {
+        dataCollected: {
+          heading: "Datos que recabamos",
+          body: "Nombre, correo electrónico, número telefónico y la descripción de su situación legal, incluyendo cualquier documento que decida compartir con nosotros.",
+        },
+        purposes: {
+          heading: "Finalidades",
+          body: "Utilizamos sus datos para responder a su consulta, brindar asesoría legal y dar seguimiento a su caso. Si lo contactamos con información sobre nuestros servicios, usted podrá solicitar en cualquier momento que dejemos de hacerlo.",
+        },
+        transfers: {
+          heading: "Transferencia de datos",
+          body: "Sus datos podrán compartirse con notarios, autoridades o terceros únicamente cuando sea necesario para la gestión de su asunto legal, y siempre bajo estricta confidencialidad.",
+        },
+        arcoRights: {
+          heading: "Derechos ARCO",
+          body: "Usted tiene derecho a acceder, rectificar, cancelar u oponerse al uso de sus datos personales. Para ejercer estos derechos, contáctenos en contacto@roblesandco.mx.",
+        },
+        changes: {
+          heading: "Modificaciones a este aviso",
+          body: "Cualquier modificación a este aviso será publicada en esta misma página.",
+        },
+      },
     },
     funnel: {
       whatCanWeHelp: "¿En qué podemos ayudarte?",

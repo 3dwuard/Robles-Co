@@ -10,6 +10,7 @@ import FadeInSection from "@/components/FadeInSection";
 import { practiceAreas } from "@/data/practiceAreas";
 import { teamMembers } from "@/data/team";
 import { useTranslation } from "@/lib/LanguageContext";
+import { FIRM_CONTACT } from "@/components/intake/types";
 
 type NavLinkKey = "services" | "team" | "cases" | "careers";
 type NavLink = { key: NavLinkKey; href: string };
@@ -298,7 +299,28 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="w-full border-t border-gray-200 px-6 py-8">
-        <p className="text-center text-xs text-gray-400">
+        <div className="mx-auto flex max-w-4xl flex-col items-center gap-2 text-xs text-gray-500 sm:flex-row sm:justify-center sm:gap-6">
+          <a
+            href={FIRM_CONTACT.emailHref}
+            className="transition-colors hover:text-[#ad8a4e]"
+          >
+            {FIRM_CONTACT.email}
+          </a>
+          <a
+            href={FIRM_CONTACT.phoneHref}
+            className="transition-colors hover:text-[#ad8a4e]"
+          >
+            {FIRM_CONTACT.phone}
+          </a>
+          <Link
+            href="/aviso-de-privacidad"
+            className="transition-colors hover:text-[#ad8a4e]"
+          >
+            {t.footer.privacyLink}
+          </Link>
+        </div>
+
+        <p className="mt-4 text-center text-xs text-gray-400">
           {t.footer.text}
         </p>
       </footer>
