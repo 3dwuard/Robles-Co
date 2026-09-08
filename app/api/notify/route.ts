@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const NOTIFY_TO = "joseeduardocontreras@hotmail.com";
+const NOTIFY_TO = "contacto@roblesandco.mx";
 const NOTIFY_FROM = "onboarding@resend.dev";
 
 type NotifyPayload = {
